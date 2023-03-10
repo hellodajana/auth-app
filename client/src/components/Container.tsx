@@ -1,30 +1,42 @@
-import "./Container.scss"
+import React, { useState } from "react";
+import Form from "./Form";
 
 type ChildrenProps = {
     children: string;
 };
 
 const Container = ({ children }: ChildrenProps) => {
+
+    const [getUser, setGetUser] = useState<{ email: string, password: string, username: string }>({
+        email: "",
+        password: "",
+        username: ""
+    })
+
+    const { email, password, username } = getUser
+
     return (
         <section className="Login">
             <h1 className="title">{children}</h1>
             <form className="Login__form">
                 {children === "Register" &&
-                    <>
-                        <label className="Login__label">
-                            Email
-                        </label>
-                        <input className="Login__input" />
-                    </>
+                    <Form children="Username" />
                 }
-                <label className="Login__label">
-                    Email
-                </label>
-                <input className="Login__input" />
-                <label className="Login__label">
-                    Password
-                </label>
-                <input className="Login__input" />
+                <Form children="Email" />
+                <Form children="Password" />
+
+                {/* <input className="Login__input"
+                    type="password"
+                    id="password"
+                    name="password"
+                    required
+                    autoComplete="off"
+                    value={password}
+                    onChange={(e) => setGetUser({
+                        ...getUser,
+                        password: e.target.value
+                    })}
+                /> */}
                 <button className="Login__btn">{children}</button>
             </form>
         </section>
